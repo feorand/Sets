@@ -48,9 +48,9 @@ class GameViewController: UIViewController {
         guard recognizer.state == .ended else { return }
         let cardView = recognizer.view! as! UICardView
         
-        let cardKey = board.cards.first(where: { $0.value == cardView })!.key
+        let card = PropertyTranslator.CardFrom(view: cardView)
         
-        game.select(key: cardKey)
+        game.select(card: card)
         update()
         
         if game.isOver {
@@ -87,7 +87,7 @@ class GameViewController: UIViewController {
         for card in game.displayedCards {
             let cardView = PropertyTranslator.ViewFrom(card: card.value)
             cardView.isSelected = game.selectedCards.contains(card.key)
-            board.addCardView(key: card.key, value: cardView)
+            board.add(card: cardView)
             addGestureRecognizersToCard(card: cardView)
         }
         

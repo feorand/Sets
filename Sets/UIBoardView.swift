@@ -10,7 +10,7 @@ import UIKit
 
 class UIBoardView: UIView {
     
-    private(set) var cards: [Int: UICardView] = [:] { didSet { setNeedsLayout() } }
+    private(set) var cards: [UICardView] = [] { didSet { setNeedsLayout() } }
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -23,12 +23,12 @@ class UIBoardView: UIView {
         addCardsToView()
     }
     
-    public func addCardView(key:Int, value: UICardView) {
-        cards[key] = value
+    public func add(card: UICardView) {
+        cards.append(card)
     }
     
     public func clearCards() {
-        cards = [:]
+        cards = []
     }
     
     private func clearCardsFromView() {
@@ -39,7 +39,7 @@ class UIBoardView: UIView {
     
     private func calculateFramesForCards() -> Grid {
         var grid = Grid(layout: .aspectRatio(0.66), frame: bounds)
-        grid.cellCount = cards.filter{ !$0.value.isHidden }.count
+        grid.cellCount = cards.filter{ !$0.isHidden }.count
         return grid
     }
     
@@ -53,14 +53,14 @@ class UIBoardView: UIView {
 //            )
 //        }
         
-        for card in cards {
-            card.value.frame = frames[card.key]!
+        for (index, card) in cards.enumerated() {
+            card.frame = frames[index]!
         }
     }
     
     private func addCardsToView() {
         for card in cards {
-            addSubview(card.value)
+            addSubview(card)
         }
     }
 }

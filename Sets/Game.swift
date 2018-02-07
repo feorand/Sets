@@ -39,6 +39,11 @@ struct Game {
         }
     }
     
+    mutating func select(card: Card) {
+        let key = displayedCards.first(where: { $0.value == card })!.key
+        select(key: key)
+    }
+    
     mutating func select(key: Int) {
         if let lastSelected = selectedCards.last, lastSelected == key {
             selectedCards.removeLast()
@@ -133,15 +138,17 @@ struct Game {
     }
     
     private func isSet(key1: Int, key2: Int, key3: Int) -> Bool {
-        let card1 = displayedCards[key1]!
-        let card2 = displayedCards[key2]!
-        let card3 = displayedCards[key3]!
-
-        let isNumberSet = isPropertySet(value1: card1.number, value2: card2.number, value3: card3.number)
-        let isColorSet = isPropertySet(value1: card1.color, value2: card2.color, value3: card3.color)
-        let isShadingSet = isPropertySet(value1: card1.shading, value2: card2.shading, value3: card3.shading)
-        let isSymbolSet = isPropertySet(value1: card1.symbol, value2: card2.symbol, value3: card3.symbol)
-        return isShadingSet && isSymbolSet && isNumberSet && isColorSet
+//        let card1 = displayedCards[key1]!
+//        let card2 = displayedCards[key2]!
+//        let card3 = displayedCards[key3]!
+//
+//        let isNumberSet = isPropertySet(value1: card1.number, value2: card2.number, value3: card3.number)
+//        let isColorSet = isPropertySet(value1: card1.color, value2: card2.color, value3: card3.color)
+//        let isShadingSet = isPropertySet(value1: card1.shading, value2: card2.shading, value3: card3.shading)
+//        let isSymbolSet = isPropertySet(value1: card1.symbol, value2: card2.symbol, value3: card3.symbol)
+//        return isShadingSet && isSymbolSet && isNumberSet && isColorSet
+        
+        return true
     }
     
     private func isPropertySet<T: Equatable>(value1: T, value2: T, value3: T) -> Bool {
