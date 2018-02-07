@@ -63,7 +63,6 @@ class GameViewController: UIViewController {
         
         if recognizer.state == .ended {
             game.askToDealThreeCards()
-            board.clearCards()
             update()
         }
     }
@@ -83,11 +82,11 @@ class GameViewController: UIViewController {
     }
     
     private func update() {
-        board.clearCards()
+        board.cards = []
         for card in game.displayedCards {
             let cardView = PropertyTranslator.ViewFrom(card: card.value)
             cardView.isSelected = game.selectedCards.contains(card.key)
-            board.add(card: cardView)
+            board.cards.append(cardView)
             addGestureRecognizersToCard(card: cardView)
         }
         
@@ -96,7 +95,6 @@ class GameViewController: UIViewController {
     
     private func startNewGame() {
         game = Game(numberOfCards: 12)
-        board.clearCards()
         update()
     }
     

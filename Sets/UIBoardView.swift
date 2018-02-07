@@ -10,7 +10,7 @@ import UIKit
 
 class UIBoardView: UIView {
     
-    private(set) var cards: [UICardView] = [] { didSet { setNeedsLayout() } }
+    var cards: [UICardView] = [] { didSet { setNeedsLayout() } }
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -21,14 +21,6 @@ class UIBoardView: UIView {
         updateCards(withFrames: frames)
         
         addCardsToView()
-    }
-    
-    public func add(card: UICardView) {
-        cards.append(card)
-    }
-    
-    public func clearCards() {
-        cards = []
     }
     
     private func clearCardsFromView() {
