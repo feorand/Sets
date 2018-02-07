@@ -39,18 +39,22 @@ class UIBoardView: UIView {
     
     private func calculateFramesForCards() -> Grid {
         var grid = Grid(layout: .aspectRatio(0.66), frame: bounds)
-        grid.cellCount = cards.isEmpty ? 0 : cards.keys.max()! + 1
+        grid.cellCount = cards.filter{ !$0.value.isHidden }.count
         return grid
     }
     
     private func updateCards(withFrames frames: Grid) {
-        for card in cards{
-            UIViewPropertyAnimator.runningPropertyAnimator(
-                withDuration: 1,
-                delay: 0,
-                options: [.curveEaseInOut],
-                animations: { card.value.frame = frames[card.key]! }
-            )
+//        for card in cards{
+//            UIViewPropertyAnimator.runningPropertyAnimator(
+//                withDuration: 1,
+//                delay: 0,
+//                options: [.curveEaseInOut],
+//                animations: { card.value.frame = frames[card.key]! }
+//            )
+//        }
+        
+        for card in cards {
+            card.value.frame = frames[card.key]!
         }
     }
     
