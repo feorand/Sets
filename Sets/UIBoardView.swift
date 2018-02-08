@@ -51,4 +51,11 @@ class UIBoardView: UIView {
         subviews.last!.removeFromSuperview()
         setNeedsLayout()
     }
+    
+    func clearAll() {
+        for view in subviews {
+            view.removeFromSuperview()
+        }
+        setNeedsLayout()
+    }
 }

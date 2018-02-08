@@ -38,9 +38,10 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func giveHintButtonTouch() {
-        game.getHint()
-        updateViewFromModel()
-    }
+        let possibleCardsToDiscard = game.getHint()
+        discardCardsIfAny(cards: possibleCardsToDiscard)
+        
+        updateViewFromModel()    }
     
     @IBAction func deckButtonTouch() {
         guard !game.isDeckEmpty else { return }
@@ -51,17 +52,12 @@ class GameViewController: UIViewController {
     
     @objc func cardTouched(recognizer: UITapGestureRecognizer) {
         guard recognizer.state == .ended else { return }
-        let cardView = recognizer.view! as! UICardView
         
+        let cardView = recognizer.view! as! UICardView
         let card = PropertyTranslator.CardFrom(view: cardView)
         
-        let discardedCards = game.select(card: card)
-        
-        if let discardedCards = discardedCards {
-            for (index, card) in discardedCards {
-                showRemoveAnimation(index: index, card: card)
-            }
-        }
+        let possibleCardsToDiscard = game.select(card: card)
+        discardCardsIfAny(cards: possibleCardsToDiscard)
         
         updateViewFromModel()
         
@@ -85,7 +81,6 @@ class GameViewController: UIViewController {
     }
     
     private func updateViewFromModel() {
-        
         for (key, card) in game.displayedCards.sorted(by: { $0.key < $1.key }) {
             let cardView = PropertyTranslator.ViewFrom(card: card)
             cardView.isSelected = game.selectedCards.contains(key)
@@ -112,7 +107,17 @@ class GameViewController: UIViewController {
     }
     
     private func startNewGame() {
+        board.clearAll()
         game = Game(numberOfCards: 12)
+    }
+    
+    private func discardCardsIfAny(cards: [Int:Card]?) {
+        if let cards = cards {
+            for (index, card) in cards {
+                showRemoveAnimation(index: index, card: card)
+            }
+        }
+
     }
     
     //MARK:- Animations

@@ -78,11 +78,13 @@ struct Game {
         return nil
     }
     
-    mutating func getHint() {
+    mutating func getHint() -> [Int:Card]?{
+        var possibleCardsToDiscard:[Int:Card]? = nil
+        
         switch selectedCards.count {
         case 0:
             if let foundSet = findSet() {
-                _ = select(key: foundSet[0])
+                possibleCardsToDiscard = select(key: foundSet[0])
                 score -= 5
             } else {
                 dealCards(number: 3)
@@ -90,23 +92,26 @@ struct Game {
         case 1, 2:
             if let foundSet = findSet(withFixedCards: selectedCards) {
                 let firstUnselectedCard = foundSet.first(where: {!selectedCards.contains($0)})!
-                _ = select(key: firstUnselectedCard)
+                possibleCardsToDiscard = select(key: firstUnselectedCard)
                 score -= 5
             } else {
                 selectedCards.removeLast()
             }
         case 3:
             if isSetSelected() {
+                possibleCardsToDiscard = displayedCards.filter{ selectedCards.contains($0.key) }
                 removeSelectedCards()
                 dealCards(number: 3)
-                getHint()
+                _ = getHint()
             } else {
                 selectedCards = []
-                getHint()
+                _ = getHint()
             }
         default:
             break
         }
+        
+        return possibleCardsToDiscard
     }
     
     private mutating func dealCards(number: Int) {
