@@ -131,6 +131,10 @@ struct Game {
         }
     }
     
+    private mutating func dealCard() -> Card? {
+        return deck.isEmpty ? nil : deck.removeLast()
+    }
+    
     private func isSetSelected() -> Bool {
         if selectedCards.count < 3 { return false }
         

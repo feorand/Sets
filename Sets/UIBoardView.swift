@@ -16,7 +16,6 @@ class UIBoardView: UIView {
         super.layoutSubviews()
         
         clearCardsFromView()
-        
         let frames = calculateFramesForCards()
         updateCards(withFrames: frames)
         
@@ -36,15 +35,6 @@ class UIBoardView: UIView {
     }
     
     private func updateCards(withFrames frames: Grid) {
-//        for card in cards{
-//            UIViewPropertyAnimator.runningPropertyAnimator(
-//                withDuration: 1,
-//                delay: 0,
-//                options: [.curveEaseInOut],
-//                animations: { card.value.frame = frames[card.key]! }
-//            )
-//        }
-        
         for (index, card) in cards.enumerated() {
             card.frame = frames[index]!
         }
