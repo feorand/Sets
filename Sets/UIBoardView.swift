@@ -10,39 +10,37 @@ import UIKit
 
 class UIBoardView: UIView {
     
-    var cards: [UICardView] = [] { didSet { setNeedsLayout() } }
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        clearCardsFromView()
-        let frames = calculateFramesForCards()
-        updateCards(withFrames: frames)
-        
-        addCardsToView()
+        updateFrames()
     }
     
-    private func clearCardsFromView() {
-        _ = subviews
-            .filter{ $0 is UICardView }
-            .map{ $0.removeFromSuperview() }
-    }
-    
-    private func calculateFramesForCards() -> Grid {
+    private func updateFrames() {
         var grid = Grid(layout: .aspectRatio(0.66), frame: bounds)
-        grid.cellCount = cards.filter{ !$0.isHidden }.count
-        return grid
-    }
-    
-    private func updateCards(withFrames frames: Grid) {
-        for (index, card) in cards.enumerated() {
-            card.frame = frames[index]!
+        grid.cellCount = subviews.filter{ !$0.isHidden }.count
+        
+        for i in 0..<subviews.count {
+            subviews[i].frame = grid[i]!
         }
     }
     
-    private func addCardsToView() {
-        for card in cards {
-            addSubview(card)
-        }
+    func updateCardView(at index: Int, with cardView: UICardView) {
+        cardView.frame = subviews[index].frame
+        
+        let subviewCard = subviews[index] as! UICardView
+        subviewCard.color = cardView.color
+        subviewCard.isSelected = cardView.isSelected
+        subviewCard.number = cardView.number
+        subviewCard.shading = cardView.shading
+        subviewCard.symbol = cardView.symbol
+    }
+    
+    func add(cardView: UICardView) {
+        addSubview(cardView)
+    }
+    
+    func removeLast() {
+        subviews.last!.removeFromSuperview()
     }
 }

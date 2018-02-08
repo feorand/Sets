@@ -16,7 +16,7 @@ class GameViewController: UIViewController {
     
     @IBOutlet weak var scoreLabel: UILabel!
     
-    var game:Game! { didSet { update() }}
+    var game:Game! { didSet { updateViewFromModel() }}
     
     //MARK:- UIViewController method overrides
     
@@ -41,7 +41,7 @@ class GameViewController: UIViewController {
     
     @IBAction func giveHintButtonTouch() {
         game.getHint()
-        update()
+        updateViewFromModel()
     }
     
     @objc func cardTouched(recognizer: UITapGestureRecognizer) {
@@ -51,7 +51,7 @@ class GameViewController: UIViewController {
         let card = PropertyTranslator.CardFrom(view: cardView)
         
         game.select(card: card)
-        update()
+        updateViewFromModel()
         
         if game.isOver {
             startNewGame()
@@ -63,14 +63,14 @@ class GameViewController: UIViewController {
         
         if recognizer.state == .ended {
             game.askToDealThreeCards()
-            update()
+            updateViewFromModel()
         }
     }
     
     @objc func rotateGestured(recognizer: UIRotationGestureRecognizer) {
         if recognizer.state == .ended {
             game.shuffleDisplayCards()
-            update()
+            updateViewFromModel()
         }
     }
     
@@ -81,21 +81,29 @@ class GameViewController: UIViewController {
         card.addGestureRecognizer(recognizer)
     }
     
-    private func update() {
-        board.cards = []
-        for card in game.displayedCards {
-            let cardView = PropertyTranslator.ViewFrom(card: card.value)
-            cardView.isSelected = game.selectedCards.contains(card.key)
-            board.cards.append(cardView)
+    private func updateViewFromModel() {
+        for (key, card) in game.displayedCards.sorted(by: { $0.key < $1.key }) {
+            let cardView = PropertyTranslator.ViewFrom(card: card)
+            cardView.isSelected = game.selectedCards.contains(key)
             addGestureRecognizersToCard(card: cardView)
+
+            if key < board.subviews.count {
+                board.updateCardView(at: key, with: cardView)
+            } else {
+                board.add(cardView: cardView)
+            }
         }
         
+        if game.displayedCards.count < board.subviews.count {
+            for _ in game.displayedCards.count..<board.subviews.count {
+                board.removeLast()
+            }
+        }
         scoreLabel.text = "Score: \(game.score)"
     }
     
     private func startNewGame() {
         game = Game(numberOfCards: 12)
-        update()
     }
     
     //MARK:- Animations
