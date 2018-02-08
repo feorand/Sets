@@ -169,3 +169,11 @@ extension UICardView {
         case solid, striped, open
     }
 }
+
+extension UICardView: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copyCard = UICardView(frame: frame, number: number, symbol: symbol, shading: shading, color: color)
+        copyCard.isSelected = isSelected
+        return copyCard
+    }
+}

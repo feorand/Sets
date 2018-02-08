@@ -55,7 +55,14 @@ class GameViewController: UIViewController {
         
         let card = PropertyTranslator.CardFrom(view: cardView)
         
-        game.select(card: card)
+        let discardedCards = game.select(card: card)
+        
+        if let discardedCards = discardedCards {
+            for (index, card) in discardedCards {
+                showRemoveAnimation(index: index, card: card)
+            }
+        }
+        
         updateViewFromModel()
         
         if game.isOver {
@@ -105,6 +112,28 @@ class GameViewController: UIViewController {
     
     //MARK:- Animations
     
-    
+    func showRemoveAnimation(index: Int, card: Card) {
+        board.subviews[index].alpha = 0
+        
+        let cardView = PropertyTranslator.ViewFrom(card: card)
+        cardView.frame = board.subviews[index].frame.offsetBy(dx: board.frame.origin.x, dy: board.frame.origin.y)
+        view.addSubview(cardView)
+        
+        UIViewPropertyAnimator.runningPropertyAnimator(
+            withDuration: 0.5,
+            delay: 0,
+            options: [.curveLinear],
+            animations: { cardView.alpha = 0 },
+            completion: { position in
+                cardView.removeFromSuperview()
+                UIViewPropertyAnimator.runningPropertyAnimator(
+                    withDuration: 0.5,
+                    delay: 0,
+                    options: [.curveLinear],
+                    animations: { self.board.subviews[index].alpha = 1 }
+                )
+            }
+        )
+    }
 }
 

@@ -39,15 +39,15 @@ struct Game {
         }
     }
     
-    mutating func select(card: Card) {
+    mutating func select(card: Card) -> [Int:Card]? {
         let key = displayedCards.first(where: { $0.value == card })!.key
-        select(key: key)
+        return select(key: key)
     }
     
-    mutating func select(key: Int) {
+    mutating func select(key: Int) -> [Int:Card]? {
         if let lastSelected = selectedCards.last, lastSelected == key {
             selectedCards.removeLast()
-            return
+            return nil
         }
         
         if selectedCards.count == 2 && displayedCards.count == 3 {
@@ -56,7 +56,7 @@ struct Game {
         
         if selectedCards.count < 3 {
             selectedCards.append(key)
-            return
+            return nil
         }
         
         if isSetSelected() {
@@ -64,20 +64,25 @@ struct Game {
             timeSinceLastSet = Date()
             score += 10 + max(0, 10 - Int(elapsedTime))
             
+            let previousSelectedCards = displayedCards.filter{ selectedCards.contains($0.key) }
             removeSelectedCards()
             dealCards(number: 3)
             selectedCards.append(key)
+            
+            return previousSelectedCards
         } else {
             score -= 5
             selectedCards = [key]
         }
+        
+        return nil
     }
     
     mutating func getHint() {
         switch selectedCards.count {
         case 0:
             if let foundSet = findSet() {
-                select(key: foundSet[0])
+                _ = select(key: foundSet[0])
                 score -= 5
             } else {
                 dealCards(number: 3)
@@ -85,7 +90,7 @@ struct Game {
         case 1, 2:
             if let foundSet = findSet(withFixedCards: selectedCards) {
                 let firstUnselectedCard = foundSet.first(where: {!selectedCards.contains($0)})!
-                select(key: firstUnselectedCard)
+                _ = select(key: firstUnselectedCard)
                 score -= 5
             } else {
                 selectedCards.removeLast()

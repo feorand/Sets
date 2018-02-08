@@ -10,6 +10,8 @@ import UIKit
 
 class UIBoardView: UIView {
     
+    private var cardsCount = 0
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -18,9 +20,9 @@ class UIBoardView: UIView {
     
     private func updateFrames() {
         var grid = Grid(layout: .aspectRatio(0.64), frame: bounds)
-        grid.cellCount = subviews.filter{ !$0.isHidden }.count
+        grid.cellCount = cardsCount
         
-        for i in 0..<subviews.count {
+        for i in 0..<cardsCount {
             UIViewPropertyAnimator.runningPropertyAnimator(
                 withDuration: 0.5,
                 delay: 0,
@@ -43,9 +45,11 @@ class UIBoardView: UIView {
     
     func add(cardView: UICardView) {
         addSubview(cardView)
+        cardsCount += 1
     }
     
     func removeLast() {
         subviews.last!.removeFromSuperview()
+        cardsCount -= 1
     }
 }
