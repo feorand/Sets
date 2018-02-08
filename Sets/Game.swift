@@ -110,30 +110,10 @@ struct Game {
     }
     
     private mutating func dealCards(number: Int) {
-        let actualNumber = min(number, deck.count)
-        
-        for _ in 0..<actualNumber {
+        for _ in 0..<number where !deck.isEmpty {
             let indexOfFirstEmptySlot = findFirstEmptySlot()
             displayedCards[indexOfFirstEmptySlot] = deck.removeLast()
-        }
-        
-        let emptySlotsCount = number - deck.count
-        let maxKeyValue = displayedCards.keys.max() ?? 0
-
-        if emptySlotsCount <= 0 { return }
-        
-        for _ in 0..<emptySlotsCount {
-            let indexOfFirstEmptySlot = findFirstEmptySlot()
-            if indexOfFirstEmptySlot > maxKeyValue { continue }
-            
-            let displayedCardsCopy = displayedCards
-
-            for i in indexOfFirstEmptySlot..<maxKeyValue {
-                displayedCards[i] = displayedCardsCopy[i+1]
-            }
-            
-            displayedCards[maxKeyValue] = nil
-        }
+        }        
     }
     
 //    private mutating func dealCard() -> Card? {

@@ -85,10 +85,11 @@ class GameViewController: UIViewController {
     }
     
     private func updateViewFromModel() {
+        
         for (key, card) in game.displayedCards.sorted(by: { $0.key < $1.key }) {
             let cardView = PropertyTranslator.ViewFrom(card: card)
             cardView.isSelected = game.selectedCards.contains(key)
-            cardView.center = deckButton.center
+            cardView.frame = deckButton.frame
             addGestureRecognizersToCard(card: cardView)
 
             if key < board.subviews.count {
@@ -98,11 +99,15 @@ class GameViewController: UIViewController {
             }
         }
         
-        if game.displayedCards.count < board.subviews.count {
-            for _ in game.displayedCards.count..<board.subviews.count {
-                board.removeLast()
+        let cardViews = board.subviews.map{ $0 as! UICardView }
+        for cardView in cardViews {
+            let card = PropertyTranslator.CardFrom(view: cardView)
+            if !game.displayedCards.values.contains(card) {
+                cardView.isHidden = true
+                board.setNeedsLayout()
             }
         }
+        
         scoreLabel.text = "Score: \(game.score)"
     }
     
