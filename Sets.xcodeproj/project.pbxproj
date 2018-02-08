@@ -80,6 +80,7 @@
 				7A579768200C669300F0ED90 /* GameViewController.swift */,
 				7A579780200C9B7B00F0ED90 /* Array+Extension.swift */,
 				7A08294A20173DE10046ACCC /* Grid.swift */,
+				7A57976D200C669300F0ED90 /* Assets.xcassets */,
 				7A57977F200C92E900F0ED90 /* Supporting Files */,
 			);
 			path = Sets;
@@ -89,7 +90,6 @@
 			isa = PBXGroup;
 			children = (
 				7A579766200C669300F0ED90 /* AppDelegate.swift */,
-				7A57976D200C669300F0ED90 /* Assets.xcassets */,
 				7A57976F200C669300F0ED90 /* LaunchScreen.storyboard */,
 				7A579772200C669300F0ED90 /* Info.plist */,
 			);
