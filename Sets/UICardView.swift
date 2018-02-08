@@ -12,9 +12,13 @@ import UIKit
 class UICardView: UIView {
     
     @IBInspectable var number: Int = 1
+    
     var symbol: Symbol = .circle
+    
     var shading: Shading = .solid
+    
     @IBInspectable var color: UIColor = .red
+    
     var isSelected = false { didSet { setNeedsDisplay() } }
     
     init(frame: CGRect, number: Int, symbol: Symbol, shading: Shading, color: UIColor) {

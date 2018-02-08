@@ -17,11 +17,16 @@ class UIBoardView: UIView {
     }
     
     private func updateFrames() {
-        var grid = Grid(layout: .aspectRatio(0.66), frame: bounds)
+        var grid = Grid(layout: .aspectRatio(0.64), frame: bounds)
         grid.cellCount = subviews.filter{ !$0.isHidden }.count
         
         for i in 0..<subviews.count {
-            subviews[i].frame = grid[i]!
+            UIViewPropertyAnimator.runningPropertyAnimator(
+                withDuration: 0.5,
+                delay: 0,
+                options: [.curveEaseInOut],
+                animations: { self.subviews[i].frame = grid[i]! }
+            )
         }
     }
     
