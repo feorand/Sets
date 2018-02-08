@@ -23,13 +23,9 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let swipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipedDown(recognizer:)))
-        swipeRecognizer.direction = .down
-        view.addGestureRecognizer(swipeRecognizer)
-        
         let rotationRecognizer = UIRotationGestureRecognizer(target: self, action: #selector(rotateGestured(recognizer:)))
         view.addGestureRecognizer(rotationRecognizer)
-        
+                
         startNewGame()
     }
     
@@ -42,6 +38,13 @@ class GameViewController: UIViewController {
     @IBAction func giveHintButtonTouch() {
         game.getHint()
         updateViewFromModel()
+    }
+    
+    @IBAction func deckButtonTouch() {
+        guard !game.isDeckEmpty else { return }
+        
+            game.askToDealThreeCards()
+            updateViewFromModel()
     }
     
     @objc func cardTouched(recognizer: UITapGestureRecognizer) {
@@ -58,15 +61,6 @@ class GameViewController: UIViewController {
         }
     }
     
-    @objc func swipedDown(recognizer: UISwipeGestureRecognizer) {
-        guard !game.isDeckEmpty else { return }
-        
-        if recognizer.state == .ended {
-            game.askToDealThreeCards()
-            updateViewFromModel()
-        }
-    }
-    
     @objc func rotateGestured(recognizer: UIRotationGestureRecognizer) {
         if recognizer.state == .ended {
             game.shuffleDisplayCards()
@@ -77,7 +71,7 @@ class GameViewController: UIViewController {
     //MARK:- Utility
     
     private func addGestureRecognizersToCard(card: UICardView) {
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(GameViewController.cardTouched(recognizer:)))
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(cardTouched(recognizer:)))
         card.addGestureRecognizer(recognizer)
     }
     
