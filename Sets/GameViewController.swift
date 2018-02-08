@@ -16,6 +16,8 @@ class GameViewController: UIViewController {
     
     @IBOutlet weak var scoreLabel: UILabel!
     
+    @IBOutlet weak var deckButton: UIButton!
+    
     var game:Game! { didSet { updateViewFromModel() }}
     
     //MARK:- UIViewController method overrides
@@ -79,6 +81,7 @@ class GameViewController: UIViewController {
         for (key, card) in game.displayedCards.sorted(by: { $0.key < $1.key }) {
             let cardView = PropertyTranslator.ViewFrom(card: card)
             cardView.isSelected = game.selectedCards.contains(key)
+            cardView.center = deckButton.center
             addGestureRecognizersToCard(card: cardView)
 
             if key < board.subviews.count {

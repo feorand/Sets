@@ -96,6 +96,7 @@
                     </view>
                     <connections>
                         <outlet property="board" destination="aQR-Dj-tJU" id="BfP-eM-oOZ"/>
+                        <outlet property="deckButton" destination="ALo-s5-GnZ" id="Dx5-N3-74G"/>
                         <outlet property="scoreLabel" destination="HwD-iI-Xnb" id="a6A-Vj-z6u"/>
                     </connections>
                 </viewController>
