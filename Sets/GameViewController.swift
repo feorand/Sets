@@ -84,11 +84,10 @@ class GameViewController: UIViewController {
         for (key, card) in game.displayedCards.sorted(by: { $0.key < $1.key }) {
             let cardView = PropertyTranslator.ViewFrom(card: card)
             cardView.isSelected = game.selectedCards.contains(key)
-            cardView.frame = deckButton.frame
             addGestureRecognizersToCard(card: cardView)
 
             if key < board.subviews.count {
-                board.updateCardView(at: key, with: cardView)
+                board.updateCardView(index: key, cardView: cardView)
             } else {
                 board.add(cardView: cardView)
             }
@@ -117,7 +116,6 @@ class GameViewController: UIViewController {
                 showRemoveAnimation(index: index, card: card)
             }
         }
-
     }
     
     //MARK:- Animations
