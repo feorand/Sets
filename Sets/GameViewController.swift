@@ -39,15 +39,14 @@ class GameViewController: UIViewController {
     
     @IBAction func giveHintButtonTouch() {
         let possibleCardsToDiscard = game.getHint()
-        replaceDiscardedCardsAnimated(cards: possibleCardsToDiscard)
-        
-        updateViewFromModel()    }
+        updateViewFromModel(discardedCards: possibleCardsToDiscard)
+    }
     
     @IBAction func deckButtonTouch() {
         guard !game.isDeckEmpty else { return }
         
-            game.askToDealThreeCards()
-            updateViewFromModel()
+        game.askToDealThreeCards()
+        updateViewFromModel()
     }
     
     @objc func cardTouched(recognizer: UITapGestureRecognizer) {
@@ -57,9 +56,8 @@ class GameViewController: UIViewController {
         let card = PropertyTranslator.CardFrom(view: cardView)
         
         let possibleCardsToDiscard = game.select(card: card)
-        replaceDiscardedCardsAnimated(cards: possibleCardsToDiscard)
         
-        updateViewFromModel()
+        updateViewFromModel(discardedCards: possibleCardsToDiscard)
         
         if game.isOver {
             startNewGame()
@@ -80,7 +78,7 @@ class GameViewController: UIViewController {
         card.addGestureRecognizer(recognizer)
     }
     
-    private func updateViewFromModel() {
+    private func updateViewFromModel(discardedCards: [Int:Card]? = nil) {
         for (key, card) in game.displayedCards.sorted(by: { $0.key < $1.key }) {
             let cardView = PropertyTranslator.ViewFrom(card: card)
             cardView.isSelected = game.selectedCards.contains(key)
@@ -103,6 +101,10 @@ class GameViewController: UIViewController {
         }
         
         scoreLabel.text = "Score: \(game.score)"
+        
+        if let cards = discardedCards {
+            replaceDiscardedCardsAnimated(cards: cards)
+        }
     }
     
     private func startNewGame() {
@@ -110,9 +112,7 @@ class GameViewController: UIViewController {
         game = Game(numberOfCards: 12)
     }
     
-    private func replaceDiscardedCardsAnimated(cards: [Int:Card]?) {
-        guard let cards = cards else { return }
-        
+    private func replaceDiscardedCardsAnimated(cards: [Int:Card]) {
         for (index, card) in cards {
             replaceOneCardAnimated(at: index, oldCard: card)
         }
