@@ -39,7 +39,7 @@ class GameViewController: UIViewController {
     
     @IBAction func giveHintButtonTouch() {
         let possibleCardsToDiscard = game.getHint()
-        discardCardsIfAny(cards: possibleCardsToDiscard)
+        replaceDiscardedCardsAnimated(cards: possibleCardsToDiscard)
         
         updateViewFromModel()    }
     
@@ -57,7 +57,7 @@ class GameViewController: UIViewController {
         let card = PropertyTranslator.CardFrom(view: cardView)
         
         let possibleCardsToDiscard = game.select(card: card)
-        discardCardsIfAny(cards: possibleCardsToDiscard)
+        replaceDiscardedCardsAnimated(cards: possibleCardsToDiscard)
         
         updateViewFromModel()
         
@@ -110,38 +110,34 @@ class GameViewController: UIViewController {
         game = Game(numberOfCards: 12)
     }
     
-    private func discardCardsIfAny(cards: [Int:Card]?) {
-        if let cards = cards {
-            for (index, card) in cards {
-                showRemoveAnimation(index: index, card: card)
-            }
+    private func replaceDiscardedCardsAnimated(cards: [Int:Card]?) {
+        guard let cards = cards else { return }
+        
+        for (index, card) in cards {
+            replaceOneCardAnimated(at: index, oldCard: card)
         }
     }
     
     //MARK:- Animations
     
-    func showRemoveAnimation(index: Int, card: Card) {
-        board.subviews[index].alpha = 0
-        
-        let cardView = PropertyTranslator.ViewFrom(card: card)
-        cardView.frame = board.subviews[index].frame.offsetBy(dx: board.frame.origin.x, dy: board.frame.origin.y)
-        view.addSubview(cardView)
+    func replaceOneCardAnimated(at index: Int, oldCard card: Card) {
+        let newCardView = board.subviews[index]
+        newCardView.alpha = 0
+
+        let discardedCardView = PropertyTranslator.ViewFrom(card: card)
+        discardedCardView.frame = board.subviews[index].frame.offsetBy(dx: board.frame.origin.x, dy: board.frame.origin.y)
+        view.addSubview(discardedCardView)
         
         UIViewPropertyAnimator.runningPropertyAnimator(
             withDuration: 0.5,
             delay: 0,
             options: [.curveLinear],
-            animations: { cardView.alpha = 0 },
+            animations: { discardedCardView.alpha = 0 },
             completion: { position in
-                cardView.removeFromSuperview()
-                UIViewPropertyAnimator.runningPropertyAnimator(
-                    withDuration: 0.5,
-                    delay: 0,
-                    options: [.curveLinear],
-                    animations: { self.board.subviews[index].alpha = 1 }
-                )
-            }
-        )
+                discardedCardView.removeFromSuperview()
+                //TODO: "deal" animation
+                newCardView.alpha = 1
+        })
     }
 }
 
