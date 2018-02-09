@@ -79,8 +79,10 @@ class GameViewController: UIViewController {
     }
     
     private func updateViewFromModel(discardedCards: [Int:Card]? = nil) {
+        //Deal cards from deck if needed
         if board.subviews.count < game.displayedCards.count {
-            for i in board.subviews.count..<game.displayedCards.count {
+            let firstNewCardIndex = board.subviews.count
+            for i in firstNewCardIndex..<game.displayedCards.count {
                 let card = game.displayedCards[i]!
                 let cardView = PropertyTranslator.ViewFrom(card: card)
                 addGestureRecognizersToCard(card: cardView)
@@ -88,6 +90,10 @@ class GameViewController: UIViewController {
             }
             
             board.setNeedsLayout()
+
+            for i in firstNewCardIndex..<game.displayedCards.count {
+                performDealAnimation(index: i)
+            }
         }
         
         if let discardedCards = discardedCards {
@@ -150,6 +156,18 @@ class GameViewController: UIViewController {
                 //TODO: "deal" animation
                 newCardView.alpha = 1
         })
+    }
+    
+    func performDealAnimation(index: Int) {
+        let actualCard = board.subviews[index]
+        actualCard.alpha = 0
+        
+        UIViewPropertyAnimator.runningPropertyAnimator(
+            withDuration: 0.5,
+            delay: 0,
+            options: [.curveEaseInOut],
+            animations: { actualCard.alpha = 1 }
+            )
     }
 }
 
