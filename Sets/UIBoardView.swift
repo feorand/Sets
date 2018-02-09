@@ -29,7 +29,7 @@ class UIBoardView: UIView {
     func updateCardView(index: Int, cardView: UICardView) {
         let subviewCard = subviews[index] as! UICardView
         subviewCard.color = cardView.color
-        subviewCard.isSelected = cardView.isSelected
+        //subviewCard.isSelected = cardView.isSelected
         subviewCard.number = cardView.number
         subviewCard.shading = cardView.shading
         subviewCard.symbol = cardView.symbol

@@ -18,7 +18,7 @@ class GameViewController: UIViewController {
     
     @IBOutlet weak var deckButton: UIButton!
     
-    var game:Game! { didSet { updateViewFromModel() }}
+    var game:Game!
     
     //MARK:- UIViewController method overrides
     
@@ -79,25 +79,36 @@ class GameViewController: UIViewController {
     }
     
     private func updateViewFromModel(discardedCards: [Int:Card]? = nil) {
-        for (key, card) in game.displayedCards.sorted(by: { $0.key < $1.key }) {
-            let cardView = PropertyTranslator.ViewFrom(card: card)
-            cardView.isSelected = game.selectedCards.contains(key)
-            addGestureRecognizersToCard(card: cardView)
-
-            if key < board.subviews.count {
-                board.updateCardView(index: key, cardView: cardView)
-            } else {
+        if board.subviews.count < game.displayedCards.count {
+            for i in board.subviews.count..<game.displayedCards.count {
+                let card = game.displayedCards[i]!
+                let cardView = PropertyTranslator.ViewFrom(card: card)
+                addGestureRecognizersToCard(card: cardView)
                 board.add(cardView: cardView)
             }
+            
+            board.setNeedsLayout()
         }
         
-        let cardViews = board.subviews.map{ $0 as! UICardView }
-        for cardView in cardViews {
-            let card = PropertyTranslator.CardFrom(view: cardView)
-            if !game.displayedCards.values.contains(card) {
-                cardView.isHidden = true
-                board.setNeedsLayout()
+        if let discardedCards = discardedCards {
+            for key in discardedCards.keys {
+                if game.displayedCards[key] == nil {
+                    board.subviews[key].isHidden = true
+                } else {
+                    let newCard = game.displayedCards[key]!
+                    let cardView = PropertyTranslator.ViewFrom(card: newCard)
+                    addGestureRecognizersToCard(card: cardView)
+                    board.updateCardView(index: key, cardView: cardView)
+                }
             }
+            
+            board.setNeedsLayout()
+        }
+        
+        for key in game.displayedCards.keys {
+            let cardView = board.subviews[key] as! UICardView
+            cardView.isSelected = game.selectedCards.contains(key)
+            board.setNeedsDisplay()
         }
         
         scoreLabel.text = "Score: \(game.score)"
@@ -110,6 +121,7 @@ class GameViewController: UIViewController {
     private func startNewGame() {
         board.clearAll()
         game = Game(numberOfCards: 12)
+        updateViewFromModel()
     }
     
     private func replaceDiscardedCardsAnimated(cards: [Int:Card]) {
