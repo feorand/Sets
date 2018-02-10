@@ -56,25 +56,25 @@ struct Game {
         
         if selectedCards.count < 3 {
             selectedCards.append(key)
-            return nil
         }
         
-        if isSetSelected() {
-            let elapsedTime = Date().timeIntervalSince(timeSinceLastSet)
-            timeSinceLastSet = Date()
-            score += 10 + max(0, 10 - Int(elapsedTime))
-            
-            let previousSelectedCards = displayedCards.filter{ selectedCards.contains($0.key) }
-            removeSelectedCards()
-            dealCards(number: 3)
-            selectedCards.append(key)
-            
-            return previousSelectedCards
-        } else {
-            score -= 5
-            selectedCards = [key]
+        if selectedCards.count == 3 {
+            if isSetSelected() {
+                let elapsedTime = Date().timeIntervalSince(timeSinceLastSet)
+                timeSinceLastSet = Date()
+                score += 10 + max(0, 10 - Int(elapsedTime))
+                
+                let previousSelectedCards = displayedCards.filter{ selectedCards.contains($0.key) }
+                removeSelectedCards()
+                dealCards(number: 3)
+                
+                return previousSelectedCards
+            } else {
+                score -= 5
+                selectedCards = [key]
+            }
         }
-        
+
         return nil
     }
     
