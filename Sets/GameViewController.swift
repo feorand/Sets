@@ -109,6 +109,8 @@ class GameViewController: UIViewController {
             }
             
             board.setNeedsLayout()
+            
+            replaceDiscardedCardsAnimated(cards: discardedCards)
         }
         
         for key in game.displayedCards.keys {
@@ -118,10 +120,6 @@ class GameViewController: UIViewController {
         }
         
         scoreLabel.text = "Score: \(game.score)"
-        
-        if let cards = discardedCards {
-            replaceDiscardedCardsAnimated(cards: cards)
-        }
     }
     
     private func startNewGame() {
@@ -153,7 +151,6 @@ class GameViewController: UIViewController {
             animations: { discardedCardView.alpha = 0 },
             completion: { position in
                 discardedCardView.removeFromSuperview()
-                //TODO: "deal" animation
                 newCardView.alpha = 1
         })
     }
