@@ -121,18 +121,6 @@ struct Game {
         }        
     }
     
-//    private mutating func dealCard() -> Card? {
-//        return deck.isEmpty ? nil : deck.removeLast()
-//    }
-//
-//    private mutating func replaceCardWithDealt(index: Int) {
-//        if let dealtCard = dealCard() {
-//            displayedCards[index] = dealtCard
-//        } else {
-//            //TODO: replace rubrange with empty array
-//        }
-//    }
-    
     private func isSetSelected() -> Bool {
         if selectedCards.count < 3 { return false }
         

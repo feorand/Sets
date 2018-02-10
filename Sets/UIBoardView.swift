@@ -22,6 +22,11 @@ class UIBoardView: UIView {
         grid.cellCount = notHiddenSubviews.count
         
         for (index, view) in notHiddenSubviews.enumerated() {
+            if view.frame == CGRect.zero {
+                view.frame = grid[index]!
+                continue
+            }
+            
             UIViewPropertyAnimator.runningPropertyAnimator(
                 withDuration: 0.5,
                 delay: 0,

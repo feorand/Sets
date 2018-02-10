@@ -20,6 +20,10 @@ class GameViewController: UIViewController {
     
     var game:Game!
     
+    var discardedCardsToAnimate: [Int: Card] = [:]
+    
+    var newDealedCardsToAnimate: [Int] = []
+    
     //MARK:- UIViewController method overrides
     
     override func viewDidLoad() {
@@ -92,12 +96,13 @@ class GameViewController: UIViewController {
             board.setNeedsLayout()
 
             for i in firstNewCardIndex..<game.displayedCards.count {
-                performDealAnimation(index: i)
+                newDealedCardsToAnimate.append(i)
             }
         }
         
+        //Discard or Update cards if needed
         if let discardedCards = discardedCards {
-            for key in discardedCards.keys {
+            for (key, value) in discardedCards {
                 if game.displayedCards[key] == nil {
                     board.subviews[key].isHidden = true
                 } else {
@@ -106,13 +111,16 @@ class GameViewController: UIViewController {
                     addGestureRecognizersToCard(card: cardView)
                     board.updateCardView(index: key, cardView: cardView)
                 }
+                
+                discardedCardsToAnimate[key] = value
             }
             
             board.setNeedsLayout()
-            
-            replaceDiscardedCardsAnimated(cards: discardedCards)
         }
         
+        animateCards()
+        
+        //Update selection
         for key in game.displayedCards.keys {
             let cardView = board.subviews[key] as! UICardView
             cardView.isSelected = game.selectedCards.contains(key)
@@ -128,15 +136,23 @@ class GameViewController: UIViewController {
         updateViewFromModel()
     }
     
-    private func replaceDiscardedCardsAnimated(cards: [Int:Card]) {
-        for (index, card) in cards {
-            replaceOneCardAnimated(at: index, oldCard: card)
-        }
-    }
-    
     //MARK:- Animations
     
-    func replaceOneCardAnimated(at index: Int, oldCard card: Card) {
+    private func animateCards() {
+        for (key, value) in discardedCardsToAnimate {
+            performDiscardAnimation(at: key, oldCard: value)
+        }
+        
+        discardedCardsToAnimate = [:]
+        
+        for i in newDealedCardsToAnimate {
+            performDealAnimation(index: i)
+        }
+        
+        newDealedCardsToAnimate = []
+    }
+    
+    func performDiscardAnimation(at index: Int, oldCard card: Card) {
         let newCardView = board.subviews[index]
         newCardView.alpha = 0
 
@@ -151,7 +167,7 @@ class GameViewController: UIViewController {
             animations: { discardedCardView.alpha = 0 },
             completion: { position in
                 discardedCardView.removeFromSuperview()
-                newCardView.alpha = 1
+                self.performDealAnimation(index: index)
         })
     }
     
