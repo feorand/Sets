@@ -22,14 +22,18 @@ class UIBoardView: UIView {
         grid.cellCount = notHiddenSubviews.count
         
         for (index, view) in notHiddenSubviews.enumerated() {
-            view.frame = grid[index]!
+            UIViewPropertyAnimator.runningPropertyAnimator(
+                withDuration: 0.5,
+                delay: 0,
+                options: [.curveEaseInOut],
+                animations: { view.frame = grid[index]! }
+            )
         }
     }
     
     func updateCardView(index: Int, cardView: UICardView) {
         let subviewCard = subviews[index] as! UICardView
         subviewCard.color = cardView.color
-        //subviewCard.isSelected = cardView.isSelected
         subviewCard.number = cardView.number
         subviewCard.shading = cardView.shading
         subviewCard.symbol = cardView.symbol
