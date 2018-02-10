@@ -16,8 +16,9 @@ class UIBoardView: UIView {
         updateFrames()
     }
     
-    private func updateFrames() {
+    func updateFrames() {
         let notHiddenSubviews = subviews.filter{ !$0.isHidden }
+        
         var grid = Grid(layout: .aspectRatio(0.64), frame: bounds)
         grid.cellCount = notHiddenSubviews.count
         
@@ -48,18 +49,15 @@ class UIBoardView: UIView {
     
     func add(cardView: UICardView) {
         addSubview(cardView)
-        setNeedsLayout()
     }
     
     func removeLast() {
         subviews.last!.removeFromSuperview()
-        setNeedsLayout()
     }
     
     func clearAll() {
         for view in subviews {
             view.removeFromSuperview()
         }
-        setNeedsLayout()
     }
 }

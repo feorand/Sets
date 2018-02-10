@@ -93,7 +93,7 @@ class GameViewController: UIViewController {
                 board.add(cardView: cardView)
             }
             
-            board.setNeedsLayout()
+            board.updateFrames()
 
             for i in firstNewCardIndex..<game.displayedCards.count {
                 newDealedCardsToAnimate.append(i)
@@ -173,13 +173,15 @@ class GameViewController: UIViewController {
     
     func performDealAnimation(index: Int) {
         let actualCard = board.subviews[index]
-        actualCard.alpha = 0
-        
+        actualCard.alpha = 1
+        let cardFrame = actualCard.frame
+        actualCard.frame = deckButton.frame.offsetBy(dx: -board.frame.origin.x, dy: -board.frame.origin.y)
+
         UIViewPropertyAnimator.runningPropertyAnimator(
             withDuration: 0.5,
             delay: 0,
             options: [.curveEaseInOut],
-            animations: { actualCard.alpha = 1 }
+            animations: { actualCard.frame = cardFrame }
             )
     }
 }
