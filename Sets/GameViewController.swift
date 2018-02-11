@@ -128,6 +128,7 @@ class GameViewController: UIViewController {
         }
         
         scoreLabel.text = "Score: \(game.score)"
+        if game.isDeckEmpty { deckButton.isHidden = true }
     }
     
     private func startNewGame() {
@@ -158,6 +159,7 @@ class GameViewController: UIViewController {
 
         let discardedCardView = PropertyTranslator.ViewFrom(card: card)
         discardedCardView.frame = board.subviews[index].frame.offsetBy(dx: board.frame.origin.x, dy: board.frame.origin.y)
+        discardedCardView.isSelected = true
         view.addSubview(discardedCardView)
         
         UIViewPropertyAnimator.runningPropertyAnimator(
@@ -177,6 +179,7 @@ class GameViewController: UIViewController {
         card.frame = deckButton.frame.offsetBy(dx: -board.frame.origin.x, dy: -board.frame.origin.y)
         card.isBack = true
         card.alpha = 1
+        view.bringSubview(toFront: card)
 
         UIViewPropertyAnimator.runningPropertyAnimator(
             withDuration: 0.5,
