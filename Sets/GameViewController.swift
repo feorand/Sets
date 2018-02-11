@@ -172,17 +172,26 @@ class GameViewController: UIViewController {
     }
     
     func performDealAnimation(index: Int) {
-        let actualCard = board.subviews[index]
-        actualCard.alpha = 1
-        let cardFrame = actualCard.frame
-        actualCard.frame = deckButton.frame.offsetBy(dx: -board.frame.origin.x, dy: -board.frame.origin.y)
+        let card = board.subviews[index] as! UICardView
+        let cardFrame = card.frame
+        card.frame = deckButton.frame.offsetBy(dx: -board.frame.origin.x, dy: -board.frame.origin.y)
+        card.isBack = true
+        card.alpha = 1
 
         UIViewPropertyAnimator.runningPropertyAnimator(
             withDuration: 0.5,
             delay: 0,
             options: [.curveEaseInOut],
-            animations: { actualCard.frame = cardFrame }
-            )
+            animations: { card.frame = cardFrame },
+            completion: { position in
+                UIView.transition(
+                    with: card,
+                    duration: 0.5,
+                    options: [.transitionFlipFromLeft],
+                    animations: { card.isBack = false }
+                )
+            }
+        )
     }
 }
 
