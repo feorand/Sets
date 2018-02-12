@@ -21,7 +21,7 @@ class UICardView: UIView {
     
     var isSelected = false { didSet { setNeedsDisplay() } }
     
-    var isBack = false { didSet { setNeedsLayout(); setNeedsDisplay() }}
+    var isBack = false { didSet { setNeedsDisplay() }}
     
     init(frame: CGRect, number: Int, symbol: Symbol, shading: Shading, color: UIColor) {
         self.number = number
@@ -52,26 +52,16 @@ class UICardView: UIView {
         set { shading = Shading(rawValue: newValue) ?? Shading.solid }
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        if isBack == true {
-        let cardBackView = UIImageView(image: #imageLiteral(resourceName: "card-back.png"))
-        cardBackView.frame = bounds
-        cardBackView.contentMode = .scaleAspectFit
-        addSubview(cardBackView)
-        } else {
-            if subviews.count > 0 {
-                subviews[0].removeFromSuperview()
-            }
-        }
-    }
-    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-        drawCard()
-        drawAllSymbols()
+        if isBack == true {
+            let cardBackImage = UIImage(named: "card-back")!
+            cardBackImage.draw(in: bounds)
+        } else {
+            drawCard()
+            drawAllSymbols()
+        }
     }
     
     private func drawCard() {

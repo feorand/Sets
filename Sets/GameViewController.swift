@@ -128,7 +128,6 @@ class GameViewController: UIViewController {
         }
         
         scoreLabel.text = "Score: \(game.score)"
-        if game.isDeckEmpty { deckButton.isHidden = true }
     }
     
     private func startNewGame() {
@@ -191,7 +190,8 @@ class GameViewController: UIViewController {
                     with: card,
                     duration: 0.5,
                     options: [.transitionFlipFromLeft],
-                    animations: { card.isBack = false }
+                    animations: { card.isBack = false },
+                    completion: { finished in self.deckButton.isHidden = self.game.isDeckEmpty }
                 )
             }
         )
