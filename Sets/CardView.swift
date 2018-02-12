@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class UICardView: UIView {
+class CardView: UIView {
     
     @IBInspectable var number: Int = 1
     
@@ -169,7 +169,7 @@ class UICardView: UIView {
     }
 }
 
-extension UICardView {
+extension CardView {
     enum Symbol: Int {
         case diamond, circle, triangle
     }
@@ -179,9 +179,9 @@ extension UICardView {
     }
 }
 
-extension UICardView: NSCopying {
+extension CardView: NSCopying {
     func copy(with zone: NSZone? = nil) -> Any {
-        let copyCard = UICardView(frame: frame, number: number, symbol: symbol, shading: shading, color: color)
+        let copyCard = CardView(frame: frame, number: number, symbol: symbol, shading: shading, color: color)
         copyCard.isSelected = isSelected
         return copyCard
     }

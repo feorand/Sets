@@ -37,8 +37,8 @@ class UIBoardView: UIView {
         }
     }
     
-    func updateCardView(index: Int, cardView: UICardView) {
-        let subviewCard = subviews[index] as! UICardView
+    func updateCardView(index: Int, cardView: CardView) {
+        let subviewCard = subviews[index] as! CardView
         subviewCard.color = cardView.color
         subviewCard.number = cardView.number
         subviewCard.shading = cardView.shading
@@ -47,7 +47,7 @@ class UIBoardView: UIView {
         setNeedsDisplay()
     }
     
-    func add(cardView: UICardView) {
+    func add(cardView: CardView) {
         addSubview(cardView)
     }
     

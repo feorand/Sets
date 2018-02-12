@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		7A08294920173CA30046ACCC /* UIBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A08294820173CA30046ACCC /* UIBoardView.swift */; };
 		7A08294B20173DE10046ACCC /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A08294A20173DE10046ACCC /* Grid.swift */; };
-		7A08294D201744F10046ACCC /* UICardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A08294C201744F10046ACCC /* UICardView.swift */; };
+		7A08294D201744F10046ACCC /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A08294C201744F10046ACCC /* CardView.swift */; };
 		7A3566C52031CA9500C26EF5 /* CardBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3566C42031CA9500C26EF5 /* CardBehavior.swift */; };
 		7A579767200C669300F0ED90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A579766200C669300F0ED90 /* AppDelegate.swift */; };
 		7A579769200C669300F0ED90 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A579768200C669300F0ED90 /* GameViewController.swift */; };
@@ -25,7 +25,7 @@
 /* Begin PBXFileReference section */
 		7A08294820173CA30046ACCC /* UIBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBoardView.swift; sourceTree = "<group>"; };
 		7A08294A20173DE10046ACCC /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
-		7A08294C201744F10046ACCC /* UICardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICardView.swift; sourceTree = "<group>"; };
+		7A08294C201744F10046ACCC /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		7A3566C42031CA9500C26EF5 /* CardBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBehavior.swift; sourceTree = "<group>"; };
 		7A579763200C669300F0ED90 /* Sets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A579766200C669300F0ED90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -72,7 +72,7 @@
 			children = (
 				7A57976A200C669300F0ED90 /* Main.storyboard */,
 				7ADF226A201B590C00449FA8 /* PropertyTranslator.swift */,
-				7A08294C201744F10046ACCC /* UICardView.swift */,
+				7A08294C201744F10046ACCC /* CardView.swift */,
 				7A3566C42031CA9500C26EF5 /* CardBehavior.swift */,
 				7A08294820173CA30046ACCC /* UIBoardView.swift */,
 				7A579779200C66F500F0ED90 /* Card.swift */,
@@ -174,7 +174,7 @@
 				7A08294B20173DE10046ACCC /* Grid.swift in Sources */,
 				7A08294920173CA30046ACCC /* UIBoardView.swift in Sources */,
 				7A57977A200C66F500F0ED90 /* Card.swift in Sources */,
-				7A08294D201744F10046ACCC /* UICardView.swift in Sources */,
+				7A08294D201744F10046ACCC /* CardView.swift in Sources */,
 				7A579767200C669300F0ED90 /* AppDelegate.swift in Sources */,
 				7A57977E200C905A00F0ED90 /* Game.swift in Sources */,
 				7A3566C52031CA9500C26EF5 /* CardBehavior.swift in Sources */,

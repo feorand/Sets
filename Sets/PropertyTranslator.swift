@@ -15,13 +15,13 @@ struct PropertyTranslator {
         .number3: 3
     ]
     
-    static let Symbols: [Card.Symbol : UICardView.Symbol] = [
+    static let Symbols: [Card.Symbol : CardView.Symbol] = [
         .symbol1: .circle,
         .symbol2: .diamond,
         .symbol3: .triangle
     ]
     
-    static let Shadings: [Card.Shading : UICardView.Shading] = [
+    static let Shadings: [Card.Shading : CardView.Shading] = [
         .shading1: .open,
         .shading2: .solid,
         .shading3: .striped
@@ -33,15 +33,15 @@ struct PropertyTranslator {
         .color3: #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
     ]
     
-    static func ViewFrom(card: Card) -> UICardView {
+    static func ViewFrom(card: Card) -> CardView {
         let number = Numbers[card.number]!
         let symbol = Symbols[card.symbol]!
         let shading = Shadings[card.shading]!
         let color = Colors[card.color]!
-        return UICardView(frame: CGRect.zero, number: number, symbol: symbol, shading: shading, color: color)
+        return CardView(frame: CGRect.zero, number: number, symbol: symbol, shading: shading, color: color)
     }
     
-    static func CardFrom(view: UICardView) -> Card {
+    static func CardFrom(view: CardView) -> Card {
         let number = Numbers.first(where: { $0.value == view.number })!.key
         let symbol = Symbols.first(where: { $0.value == view.symbol })!.key
         let shading = Shadings.first(where:{ $0.value == view.shading })!.key

@@ -56,7 +56,7 @@ class GameViewController: UIViewController {
     @objc func cardTouched(recognizer: UITapGestureRecognizer) {
         guard recognizer.state == .ended else { return }
         
-        let cardView = recognizer.view! as! UICardView
+        let cardView = recognizer.view! as! CardView
         let card = PropertyTranslator.CardFrom(view: cardView)
         
         let possibleCardsToDiscard = game.select(card: card)
@@ -77,7 +77,7 @@ class GameViewController: UIViewController {
     
     //MARK:- Utility
     
-    private func addGestureRecognizersToCard(card: UICardView) {
+    private func addGestureRecognizersToCard(card: CardView) {
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(cardTouched(recognizer:)))
         card.addGestureRecognizer(recognizer)
     }
@@ -122,7 +122,7 @@ class GameViewController: UIViewController {
         
         //Update selection
         for key in game.displayedCards.keys {
-            let cardView = board.subviews[key] as! UICardView
+            let cardView = board.subviews[key] as! CardView
             cardView.isSelected = game.selectedCards.contains(key)
             board.setNeedsDisplay()
         }
@@ -173,7 +173,7 @@ class GameViewController: UIViewController {
     }
     
     func performDealAnimation(index: Int) {
-        let card = board.subviews[index] as! UICardView
+        let card = board.subviews[index] as! CardView
         let cardFrame = card.frame
         card.frame = deckButton.frame.offsetBy(dx: -board.frame.origin.x, dy: -board.frame.origin.y)
         card.isBack = true
