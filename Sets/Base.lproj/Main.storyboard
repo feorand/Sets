@@ -29,7 +29,7 @@
                                     <action selector="deckButtonTouch" destination="BYZ-38-t0r" eventType="touchUpInside" id="8DN-8n-mcG"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQR-Dj-tJU" customClass="UIBoardView" customModule="Sets" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQR-Dj-tJU" customClass="BoardView" customModule="Sets" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="128" width="414" height="604"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>

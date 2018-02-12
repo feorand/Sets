@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UIBoardView: UIView {
+class BoardView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()

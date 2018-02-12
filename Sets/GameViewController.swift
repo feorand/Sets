@@ -12,7 +12,7 @@ class GameViewController: UIViewController {
     
     //MARK:- Properties
     
-    @IBOutlet weak var board: UIBoardView!
+    @IBOutlet weak var board: BoardView!
     
     @IBOutlet weak var scoreLabel: UILabel!
     
