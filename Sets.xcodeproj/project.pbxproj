@@ -20,7 +20,6 @@
 		7A57977E200C905A00F0ED90 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A57977D200C905A00F0ED90 /* Game.swift */; };
 		7A579781200C9B7B00F0ED90 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A579780200C9B7B00F0ED90 /* Array+Extension.swift */; };
 		7ADF226B201B590C00449FA8 /* PropertyTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADF226A201B590C00449FA8 /* PropertyTranslator.swift */; };
-		7AFE46042019B26A0089C69A /* UICircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFE46032019B26A0089C69A /* UICircleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +38,6 @@
 		7A57977D200C905A00F0ED90 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		7A579780200C9B7B00F0ED90 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		7ADF226A201B590C00449FA8 /* PropertyTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyTranslator.swift; sourceTree = "<group>"; };
-		7AFE46032019B26A0089C69A /* UICircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICircleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +70,6 @@
 		7A579765200C669300F0ED90 /* Sets */ = {
 			isa = PBXGroup;
 			children = (
-				7AFE46032019B26A0089C69A /* UICircleView.swift */,
 				7A57976A200C669300F0ED90 /* Main.storyboard */,
 				7ADF226A201B590C00449FA8 /* PropertyTranslator.swift */,
 				7A08294C201744F10046ACCC /* UICardView.swift */,
@@ -175,7 +172,6 @@
 				7A579769200C669300F0ED90 /* GameViewController.swift in Sources */,
 				7A579781200C9B7B00F0ED90 /* Array+Extension.swift in Sources */,
 				7A08294B20173DE10046ACCC /* Grid.swift in Sources */,
-				7AFE46042019B26A0089C69A /* UICircleView.swift in Sources */,
 				7A08294920173CA30046ACCC /* UIBoardView.swift in Sources */,
 				7A57977A200C66F500F0ED90 /* Card.swift in Sources */,
 				7A08294D201744F10046ACCC /* UICardView.swift in Sources */,
