@@ -70,16 +70,15 @@
 		7A579765200C669300F0ED90 /* Sets */ = {
 			isa = PBXGroup;
 			children = (
+				7A579779200C66F500F0ED90 /* Card.swift */,
+				7A57977D200C905A00F0ED90 /* Game.swift */,
 				7A57976A200C669300F0ED90 /* Main.storyboard */,
-				7ADF226A201B590C00449FA8 /* PropertyTranslator.swift */,
 				7A08294C201744F10046ACCC /* CardView.swift */,
 				7A3566C42031CA9500C26EF5 /* CardBehavior.swift */,
 				7A08294820173CA30046ACCC /* BoardView.swift */,
-				7A579779200C66F500F0ED90 /* Card.swift */,
-				7A57977D200C905A00F0ED90 /* Game.swift */,
+				7ADF226A201B590C00449FA8 /* PropertyTranslator.swift */,
 				7A579768200C669300F0ED90 /* GameViewController.swift */,
 				7A579780200C9B7B00F0ED90 /* Array+Extension.swift */,
-				7A08294A20173DE10046ACCC /* Grid.swift */,
 				7A57976D200C669300F0ED90 /* Assets.xcassets */,
 				7A57977F200C92E900F0ED90 /* Supporting Files */,
 			);
@@ -89,6 +88,7 @@
 		7A57977F200C92E900F0ED90 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7A08294A20173DE10046ACCC /* Grid.swift */,
 				7A579766200C669300F0ED90 /* AppDelegate.swift */,
 				7A57976F200C669300F0ED90 /* LaunchScreen.storyboard */,
 				7A579772200C669300F0ED90 /* Info.plist */,
