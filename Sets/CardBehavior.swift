@@ -27,7 +27,7 @@ class CardBehavior: UIDynamicBehavior {
     private func push(item: UIDynamicItem) {
         let behavior = UIPushBehavior(items: [item], mode: .instantaneous)
         behavior.angle = CGFloat.pi * CGFloat(arc4random_uniform(180)) / CGFloat(180)
-        behavior.magnitude = 20
+        behavior.magnitude = 10
         behavior.action = { [unowned behavior, weak self] in self?.removeChildBehavior(behavior) }
         behavior.addItem(item)
         addChildBehavior(behavior)

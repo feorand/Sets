@@ -174,6 +174,24 @@ class GameViewController: UIViewController {
         cardBehavior.addItem(item: discardedCardView)
         
         performDealAnimation(index: index)
+        
+        let _ = Timer.scheduledTimer(
+            withTimeInterval: 1,
+            repeats: false,
+            block: { timer in
+                self.cardBehavior.removeItem(item: discardedCardView)
+                
+                UIViewPropertyAnimator.runningPropertyAnimator(
+                    withDuration: 1,
+                    delay: 0,
+                    options: [.curveEaseInOut],
+                    animations: {
+                        discardedCardView.center = self.scoreLabel.superview!.convert(self.scoreLabel.center, to: self.view)
+                        discardedCardView.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
+                },
+                    completion: { position in discardedCardView.removeFromSuperview()})
+            }
+        )
     }
     
     func performDealAnimation(index: Int) {
