@@ -20,6 +20,16 @@ class GameViewController: UIViewController {
     
     var game:Game!
     
+    lazy var cardAnimator: UIDynamicAnimator = {
+        let animator = UIDynamicAnimator(referenceView: self.view)
+        return animator
+    }()
+    
+    lazy var cardBehavior:CardBehavior = {
+        let behavior = CardBehavior(at: cardAnimator)
+        return behavior
+    }()
+    
     var discardedCardsToAnimate: [Int: Card] = [:]
     
     var newDealedCardsToAnimate: [Int] = []
@@ -161,15 +171,9 @@ class GameViewController: UIViewController {
         discardedCardView.isSelected = true
         view.addSubview(discardedCardView)
         
-        UIViewPropertyAnimator.runningPropertyAnimator(
-            withDuration: 0.5,
-            delay: 0,
-            options: [.curveLinear],
-            animations: { discardedCardView.alpha = 0 },
-            completion: { position in
-                discardedCardView.removeFromSuperview()
-                self.performDealAnimation(index: index)
-        })
+        cardBehavior.addItem(item: discardedCardView)
+        
+        performDealAnimation(index: index)
     }
     
     func performDealAnimation(index: Int) {
