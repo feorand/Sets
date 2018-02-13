@@ -153,10 +153,22 @@ class GameViewController: UIViewController {
             performDiscardAnimation(at: key, oldCard: value)
         }
         
+        for i in discardedCardsToAnimate.keys {
+            let _ = Timer.scheduledTimer(
+                withTimeInterval: 0.1 * Double(i),
+                repeats: false,
+                block: { timer in self.performDealAnimation(index: i) })
+
+        }
+        
         discardedCardsToAnimate = [:]
         
         for i in newDealedCardsToAnimate {
-            performDealAnimation(index: i)
+            board.subviews[i].alpha = 0
+            let _ = Timer.scheduledTimer(
+                withTimeInterval: 0.1 * Double(i),
+                repeats: false,
+                block: { timer in self.performDealAnimation(index: i) })
         }
         
         newDealedCardsToAnimate = []
@@ -172,8 +184,6 @@ class GameViewController: UIViewController {
         view.addSubview(discardedCardView)
         
         cardBehavior.addItem(item: discardedCardView)
-        
-        performDealAnimation(index: index)
         
         let _ = Timer.scheduledTimer(
             withTimeInterval: 1,
