@@ -11,6 +11,12 @@
 		7A08294B20173DE10046ACCC /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A08294A20173DE10046ACCC /* Grid.swift */; };
 		7A08294D201744F10046ACCC /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A08294C201744F10046ACCC /* CardView.swift */; };
 		7A3566C52031CA9500C26EF5 /* CardBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3566C42031CA9500C26EF5 /* CardBehavior.swift */; };
+		7A3566D0203483C500C26EF5 /* CardOfPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3566CA203483C400C26EF5 /* CardOfPair.swift */; };
+		7A3566D1203483C500C26EF5 /* Concentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3566CB203483C400C26EF5 /* Concentration.swift */; };
+		7A3566D2203483C500C26EF5 /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3566CC203483C500C26EF5 /* Dictionary+Extension.swift */; };
+		7A3566D3203483C500C26EF5 /* ConcentrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3566CD203483C500C26EF5 /* ConcentrationViewController.swift */; };
+		7A3566D4203483C500C26EF5 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3566CE203483C500C26EF5 /* Theme.swift */; };
+		7A3566D5203483C500C26EF5 /* ThemeChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3566CF203483C500C26EF5 /* ThemeChooseViewController.swift */; };
 		7A579767200C669300F0ED90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A579766200C669300F0ED90 /* AppDelegate.swift */; };
 		7A579769200C669300F0ED90 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A579768200C669300F0ED90 /* GameViewController.swift */; };
 		7A57976C200C669300F0ED90 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A57976A200C669300F0ED90 /* Main.storyboard */; };
@@ -27,6 +33,12 @@
 		7A08294A20173DE10046ACCC /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		7A08294C201744F10046ACCC /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		7A3566C42031CA9500C26EF5 /* CardBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBehavior.swift; sourceTree = "<group>"; };
+		7A3566CA203483C400C26EF5 /* CardOfPair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardOfPair.swift; sourceTree = "<group>"; };
+		7A3566CB203483C400C26EF5 /* Concentration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
+		7A3566CC203483C500C26EF5 /* Dictionary+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extension.swift"; sourceTree = "<group>"; };
+		7A3566CD203483C500C26EF5 /* ConcentrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcentrationViewController.swift; sourceTree = "<group>"; };
+		7A3566CE203483C500C26EF5 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		7A3566CF203483C500C26EF5 /* ThemeChooseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeChooseViewController.swift; sourceTree = "<group>"; };
 		7A579763200C669300F0ED90 /* Sets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A579766200C669300F0ED90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A579768200C669300F0ED90 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -51,6 +63,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A3566D62034840400C26EF5 /* Concentration */ = {
+			isa = PBXGroup;
+			children = (
+				7A3566CA203483C400C26EF5 /* CardOfPair.swift */,
+				7A3566CB203483C400C26EF5 /* Concentration.swift */,
+				7A3566CD203483C500C26EF5 /* ConcentrationViewController.swift */,
+				7A3566CC203483C500C26EF5 /* Dictionary+Extension.swift */,
+				7A3566CE203483C500C26EF5 /* Theme.swift */,
+				7A3566CF203483C500C26EF5 /* ThemeChooseViewController.swift */,
+			);
+			name = Concentration;
+			sourceTree = "<group>";
+		};
 		7A57975A200C669300F0ED90 = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +95,7 @@
 		7A579765200C669300F0ED90 /* Sets */ = {
 			isa = PBXGroup;
 			children = (
+				7A3566D62034840400C26EF5 /* Concentration */,
 				7A579779200C66F500F0ED90 /* Card.swift */,
 				7A57977D200C905A00F0ED90 /* Game.swift */,
 				7A57976A200C669300F0ED90 /* Main.storyboard */,
@@ -172,10 +198,16 @@
 				7A579769200C669300F0ED90 /* GameViewController.swift in Sources */,
 				7A579781200C9B7B00F0ED90 /* Array+Extension.swift in Sources */,
 				7A08294B20173DE10046ACCC /* Grid.swift in Sources */,
+				7A3566D2203483C500C26EF5 /* Dictionary+Extension.swift in Sources */,
 				7A08294920173CA30046ACCC /* BoardView.swift in Sources */,
+				7A3566D3203483C500C26EF5 /* ConcentrationViewController.swift in Sources */,
+				7A3566D1203483C500C26EF5 /* Concentration.swift in Sources */,
 				7A57977A200C66F500F0ED90 /* Card.swift in Sources */,
 				7A08294D201744F10046ACCC /* CardView.swift in Sources */,
+				7A3566D0203483C500C26EF5 /* CardOfPair.swift in Sources */,
 				7A579767200C669300F0ED90 /* AppDelegate.swift in Sources */,
+				7A3566D4203483C500C26EF5 /* Theme.swift in Sources */,
+				7A3566D5203483C500C26EF5 /* ThemeChooseViewController.swift in Sources */,
 				7A57977E200C905A00F0ED90 /* Game.swift in Sources */,
 				7A3566C52031CA9500C26EF5 /* CardBehavior.swift in Sources */,
 			);
