@@ -10,16 +10,39 @@ import UIKit
 
 class ThemeChooseViewController: UIViewController {
     
-    var lastSeguedVC:ConcentrationViewController?
+    var lastShownConcentrationVC:ConcentrationViewController?
     
-    @IBAction func themeButtonPressed(sender: UIButton) {        
-        let name = nameOf(sender: sender)
-        let theme = themes[name]!
-        (splitViewController?.viewControllers.last as? ConcentrationViewController)?.currentTheme = theme
+    @IBAction func themeButtonPressed(sender: UIButton) {
+        if let cvc = splitViewController?.viewControllers.last as? ConcentrationViewController {
+            setThemeOf(cvc, toNameOf: sender)
+        } else {
+            if let cvc = lastShownConcentrationVC {
+                setThemeOf(cvc, toNameOf: sender)
+                navigationController?.pushViewController(cvc, animated: true)
+            } else {
+                performSegue(withIdentifier: "Chose Theme", sender: sender)
+            }
+        }
     }
 
-    private func nameOf(sender: Any?) -> String {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case .some("Chose Theme"):
+            let controller = segue.destination as! ConcentrationViewController
+            setThemeOf(controller, toNameOf: sender)
+            lastShownConcentrationVC = controller
+        default: break
+        }
+    }
+    
+    private func concentrationAsSplitVC() -> ConcentrationViewController? {
+        return splitViewController?.viewControllers.last as? ConcentrationViewController
+    }
+    
+    private func setThemeOf(_ controller:ConcentrationViewController, toNameOf sender: Any?) {
         let senderButton = sender! as! UIButton
-        return senderButton.title(for: .normal)!
+        let name = senderButton.title(for: .normal)!
+        let theme = themes[name]!
+        controller.currentTheme = theme
     }
 }

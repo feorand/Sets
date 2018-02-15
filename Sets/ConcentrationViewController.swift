@@ -17,7 +17,7 @@ class ConcentrationViewController: UIViewController
     
     var currentTheme: Theme = themes["Faces"]! {
         didSet {
-            updateViewFromModel(flips: game.flipCount, score: game.score)
+            updateViewFromModel()
         }
     }
     
@@ -29,7 +29,7 @@ class ConcentrationViewController: UIViewController
         splitViewController?.delegate = self
         
         startNewGame()
-        updateViewFromModel(flips: 0, score: 0)
+        updateViewFromModel()
     }
     
     @IBAction func touchCard(_ sender: UIButton) {
@@ -41,15 +41,20 @@ class ConcentrationViewController: UIViewController
             startNewGame()
         }
         
-        updateViewFromModel(flips: game.flipCount, score: game.score)
+        updateViewFromModel()
     }
     
     @IBAction func touchNewGameButton(_ sender: UIButton) {
         startNewGame()
-        updateViewFromModel(flips: 0, score: 0)
+        updateViewFromModel()
     }
     
-    private func updateViewFromModel(flips:Int, score:Int) {
+    private func updateViewFromModel() {
+        guard let game = game else { return }
+        
+        let flips = game.flipCount
+        let score = game.score
+        
         view.backgroundColor = currentTheme.backgroundColor
         flipCountLabel.textColor = currentTheme.foregroundColor
         scoreLabel.textColor = currentTheme.foregroundColor
