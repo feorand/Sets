@@ -17,8 +17,7 @@ class ConcentrationViewController: UIViewController
     
     var currentTheme: Theme = themes["Faces"]! {
         didSet {
-            setTheme()
-            UpdateGameView(flips: game.flipCount, score: game.score)
+            updateViewFromModel(flips: game.flipCount, score: game.score)
         }
     }
     
@@ -30,8 +29,7 @@ class ConcentrationViewController: UIViewController
         splitViewController?.delegate = self
         
         startNewGame()
-        UpdateGameView(flips: 0, score: 0)
-        setTheme()
+        updateViewFromModel(flips: 0, score: 0)
     }
     
     @IBAction func touchCard(_ sender: UIButton) {
@@ -43,15 +41,20 @@ class ConcentrationViewController: UIViewController
             startNewGame()
         }
         
-        UpdateGameView(flips: game.flipCount, score: game.score)
+        updateViewFromModel(flips: game.flipCount, score: game.score)
     }
     
     @IBAction func touchNewGameButton(_ sender: UIButton) {
         startNewGame()
-        UpdateGameView(flips: 0, score: 0)
+        updateViewFromModel(flips: 0, score: 0)
     }
     
-    private func UpdateGameView(flips:Int, score:Int) {
+    private func updateViewFromModel(flips:Int, score:Int) {
+        view.backgroundColor = currentTheme.backgroundColor
+        flipCountLabel.textColor = currentTheme.foregroundColor
+        scoreLabel.textColor = currentTheme.foregroundColor
+        newGameButton.setTitleColor(currentTheme.foregroundColor, for: .normal)
+
         for i in 0..<flipCardButtons.count {
             if game.cards[i].isFlipped {
                 flipCardButtons[i].setTitle(currentTheme.images[game.cards[i].id], for: .normal)
@@ -75,14 +78,6 @@ class ConcentrationViewController: UIViewController
     
     private func startNewGame() {
         game = Concentration(numberOfPairs: 6)
-    }
-    
-    private func setTheme() {
-        view.backgroundColor = currentTheme.backgroundColor
-                
-        flipCountLabel.textColor = currentTheme.foregroundColor
-        scoreLabel.textColor = currentTheme.foregroundColor
-        newGameButton.setTitleColor(currentTheme.foregroundColor, for: .normal)
     }
 }
 
